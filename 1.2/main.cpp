@@ -1,6 +1,6 @@
-#include<iostream>
-#include <cstring>
+#include <iostream>
 #include <cmath>
+#include <cstring>
 #include <stack>
 using namespace std;
 int getPriority(char o) {
@@ -12,8 +12,8 @@ int getPriority(char o) {
         return 1;
     return 0;
 }
-bool greaterOrEqualThan(char a, char b) {
-    if (getPriority(a) >= getPriority(b))
+bool greaterThan(char a, char b) {
+    if (getPriority(a) > getPriority(b))
         return true;
     else return false;
 }
@@ -29,7 +29,24 @@ bool isOperand(char str)
         return true;
     else return false;
 }
-string Infix2Postfix(string input) {
+string reverseStr(string s) {
+    string k = "";
+    for (int i = s.length() - 1; i >= 0; i--) {
+        if (s[i] == '(') {
+            s[i] = ')';
+            goto here;
+        }
+        if (s[i] == ')') {
+            s[i] = '(';
+            goto here;
+        }
+        here:
+        k += s[i];
+    }
+    return k;
+}
+string Infix2Prefix(string input) {
+    input = reverseStr(input);
     stack<char> Stack;
     string s = "";
     for (unsigned int i = 0; i < input.length(); i++) {
@@ -54,7 +71,7 @@ string Infix2Postfix(string input) {
             Stack.pop();
         }
         if (isOperator(input[i])) {
-            while (!Stack.empty() && Stack.top() != '(' && greaterOrEqualThan(Stack.top(), input[i])) {
+            while (!Stack.empty() && Stack.top() != '(' && greaterThan(Stack.top(), input[i])) {
                 if (!(Stack.top() == '^' && input[i] == '^')) {
                     s += Stack.top();
                     s += ' ';
@@ -69,11 +86,13 @@ string Infix2Postfix(string input) {
         s += ' ';
         Stack.pop();
     }
+    s = reverseStr(s);
     return s;
 }
-int main() {
+int main()
+{
     string s;
     cin >> s;
-    cout << Infix2Postfix(s);
+    cout << Infix2Prefix(s);
     return 0;
 }
