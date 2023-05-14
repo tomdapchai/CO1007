@@ -151,6 +151,6 @@ int main()
 {
     string s;
     getline(cin, s);
-    cout << s.find_last_not_of('0');
+    cout << PostfixPrefixCalculator(s);
     return 0;
 }

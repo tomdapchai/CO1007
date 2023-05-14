@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1684067808 source:d:\discrete mathematics\co1007\2.1\main.cpp
+	<iostream>
+	<cstring>
+	<stack>
+
