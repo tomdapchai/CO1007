@@ -46,7 +46,7 @@ string Infix2Postfix(string input) {
             Stack.push(input[i]);
         }
         if (input[i] == ')') {
-            while (Stack.top() != '(') {
+            while (!Stack.empty() && Stack.top() != '(') {
                 s += Stack.top();
                 s += ' ';
                 Stack.pop();
@@ -55,7 +55,7 @@ string Infix2Postfix(string input) {
         }
         if (isOperator(input[i])) {
             while (!Stack.empty() && Stack.top() != '(' && greaterOrEqualThan(Stack.top(), input[i])) {
-                if (!(Stack.top() == '^' && input[i] == '^')) {
+                if (!(!Stack.empty() && Stack.top() == '^' && input[i] == '^')) {
                     s += Stack.top();
                     s += ' ';
                     Stack.pop();
