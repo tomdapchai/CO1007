@@ -55,7 +55,7 @@ string Infix2Postfix(string input) {
         }
         if (isOperator(input[i])) {
             while (!Stack.empty() && Stack.top() != '(' && greaterOrEqualThan(Stack.top(), input[i])) {
-                if (!(!Stack.empty() && Stack.top() == '^' && input[i] == '^')) {
+                if (!Stack.empty()) {
                     s += Stack.top();
                     s += ' ';
                     Stack.pop();

@@ -24,7 +24,7 @@ bool isOperator(char s) {
     else return false;
 }
 bool isOperand(char s) {
-    if (s >= 'a' && s <= 'z' || s >= 'A' && s <= 'Z')
+    if ((s >= 'a' && s <= 'z') || (s >= 'A' && s <= 'Z'))
         return true;
     else return false;
 }
@@ -39,7 +39,7 @@ string LogicInfix2Postfix(string infix){
             Stack.push("(");
         }
         if (infix[i] == ')') {
-            while (Stack.top() != "(") {
+            while (!Stack.empty() && Stack.top() != "(") {
                 s += Stack.top();
                 Stack.pop();
             }
@@ -59,7 +59,7 @@ string LogicInfix2Postfix(string infix){
                 temp += infix[i];
             }
             while (!Stack.empty() && Stack.top() != "(" && greaterOrEqualThan(Stack.top(), temp)) {
-                if (!(Stack.top() == "~" && temp == "~")) {
+                if (!Stack.empty()) {
                     s += Stack.top();
                     Stack.pop();
                 }

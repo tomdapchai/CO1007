@@ -63,7 +63,7 @@ string Infix2Prefix(string input) {
             Stack.push(input[i]);
         }
         if (input[i] == ')') {
-            while (Stack.top() != '(') {
+            while (!Stack.empty() && Stack.top() != '(') {
                 s += Stack.top();
                 s += ' ';
                 Stack.pop();
@@ -72,7 +72,7 @@ string Infix2Prefix(string input) {
         }
         if (isOperator(input[i])) {
             while (!Stack.empty() && Stack.top() != '(' && greaterThan(Stack.top(), input[i])) {
-                if (!(Stack.top() == '^' && input[i] == '^')) {
+                if (!Stack.empty()) {
                     s += Stack.top();
                     s += ' ';
                     Stack.pop();
@@ -87,6 +87,7 @@ string Infix2Prefix(string input) {
         Stack.pop();
     }
     s = reverseStr(s);
+    s.erase(0, 1);
     return s;
 }
 int main()

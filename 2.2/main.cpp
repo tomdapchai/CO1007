@@ -64,7 +64,7 @@ string LogicInfix2Prefix(string infix){
             Stack.push("(");
         }
         if (infix[i] == ')') {
-            while (Stack.top() != "(") {
+            while (!Stack.empty() && Stack.top() != "(") {
                 s += Stack.top();
                 Stack.pop();
             }
@@ -86,7 +86,7 @@ string LogicInfix2Prefix(string infix){
                 temp += infix[i];
             }
             while (!Stack.empty() && Stack.top() != "(" && greaterThan(Stack.top(), temp)) {
-                if (!(Stack.top() == "~" && temp == "~")) {
+                if (!Stack.empty()) {
                     s += Stack.top();
                     Stack.pop();
                 }

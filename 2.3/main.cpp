@@ -79,9 +79,9 @@ string LogicPostfixPrefixCalculator(string input,string varlue){
                         else {
                             temp += input[i];
                         }
-                        bool b = Stack.top();
-                        Stack.pop();
                         bool a = Stack.top();
+                        Stack.pop();
+                        bool b = Stack.top();
                         Stack.pop();
                         if (temp == "&")
                             Stack.push(a && b);
